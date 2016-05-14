@@ -8,9 +8,9 @@
                 <td *ngIf="left.summary">...</td>
                 <td *ngIf="left.summary" colspan="3">{{left.text}}</td>
                 <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">{{left.number}}</td>
-                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color">{{left.text}}</td>
+                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color" (click)="left.showButton = !left.showButton;">{{left.text}}<span *ngIf="left.showButton"><button type="button" class="btn button-danger pull-right" (click)="addRandomWtf(left)">WTF?</button></span></td>
                 <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">{{diff.lines.right[i].number}}</td>
-                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="diff.lines.right[i].color">{{diff.lines.right[i].text}}</td>
+                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="diff.lines.right[i].color" (click)="diff.lines.right[i].showButton = !diff.lines.right[i].showButton;">{{diff.lines.right[i].text}}<button type="button" class="btn button-danger pull-right" (click)="addRandomWtf(diff.lines.right[i])">WTF?</button></span></td>
             </tr>
         </table>
     </div>

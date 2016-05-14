@@ -61,21 +61,21 @@ export class CodeCompareComponent implements OnInit, OnActivate{
           diff.lines.right.push({summary: true, text: line});
         } else if (line.startsWith(' ')) {
           diff = this.balanceDiff(diff);
-          diff.lines.left.push({ number: leftLines, text: line });
-          diff.lines.right.push({ number: rightLines, text: line });
+          diff.lines.left.push({ number: leftLines, text: line, showButton: false });
+          diff.lines.right.push({ number: rightLines, text: line, showButton: false });
           leftLines++;
           rightLines++;
         } else if (line.startsWith('+')) {
           diff.lines.right.push({number: rightLines,
                     text: line,
                     color: '#eaffea',
-                    lineNumberColor: '#dbffdb' });
+                    lineNumberColor: '#dbffdb', showButton: false });
           rightLines++;
         } else if (line.startsWith('-')) {
           diff.lines.left.push({ number: leftLines,
                     text: line,
                     color: '#ffecec',
-                    lineNumberColor: '#ffdddd' });
+                    lineNumberColor: '#ffdddd', showButton: false });
           leftLines++;
         }
       });
@@ -84,6 +84,14 @@ export class CodeCompareComponent implements OnInit, OnActivate{
       that.diffs.push(diff);
     }
     );
+  }
+
+  buttonOn(diff) {
+    diff.showButton = true;
+  }
+
+  buttonOff(diff){
+    diff.showButton = false;
   }
 
   private balanceDiff(diff){
