@@ -2,7 +2,7 @@ import { Injectable, Input} from '@angular/core';
 import {Http} from '@angular/http';
 
 @Injectable()
-export class DiffService{
+export class DiffService {
 
   constructor(private http: Http) {}
 

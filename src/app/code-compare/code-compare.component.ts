@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {OnActivate, RouteSegment} from '@angular/router';
 import {DiffService} from './diff-service.service';
+import {WtfImagesService} from './wtf-images.service';
 
 @Component({
   moduleId: module.id,
   selector: 'app-code-compare',
   templateUrl: 'code-compare.component.html',
   styleUrls: ['code-compare.component.css'],
-  providers: [DiffService]
+  providers: [DiffService, WtfImagesService]
 })
 export class CodeCompareComponent implements OnInit, OnActivate{
 
   pullRequestId;
   diffs = [];
 
-  constructor(private diffService: DiffService) {
+  constructor(private diffService: DiffService, private wtfImageService: WtfImagesService) {
     this.diffs = [];
   }
 
@@ -88,10 +89,10 @@ export class CodeCompareComponent implements OnInit, OnActivate{
 
   randomWtf(diff) {
     if(diff.imgSrc) {
-      diff.imgSrc = null;
+      diff.imgSrc = false;
       return;
     }
-    diff.imgSrc = "http://s2.quickmeme.com/img/d0/d0374478557798edfc964afd006512de457207f70346d8e2ef524a98afd73578.jpg";
+    diff.imgSrc = this.wtfImageService.getRandom();
   }
 
   private balanceDiff(diff){
