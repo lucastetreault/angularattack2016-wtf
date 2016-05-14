@@ -16,7 +16,7 @@ import {PullRequestListComponent} from './pull-request-list/pull-request-list.co
 ])
 export class Angularattack2016WtfAppComponent {
   title = "WTF's per minute!";
-  
+
   constructor(private router: Router){
     this.router.navigate(['/']);
   }
