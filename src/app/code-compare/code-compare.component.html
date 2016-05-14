@@ -1,8 +1,16 @@
-<p>
-  code-compare works!
-</p>
-
-And the pull request id is: {{pullRequestId}}
-
-Oh, and the diff is: 
-{{diff}}
+<div *ngFor="let file of diff">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{file.left.filename}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{file.right.filename}}
+      </div>
+    </div>
+  </div>
+</div>
