@@ -1,12 +1,17 @@
-tr.diff, tr.head {
+tr.diff,
+tr.head {
     border: none;
 }
 
-td.diff, tr.head {
+td.diff,
+tr.head {
     border-bottom: none;
     border-top: none;
     border-right: 1px solid rgb(221, 221, 221);
     border-left: 1px solid rgb(221, 221, 221);
+}
+
+span.keepWhite {
     white-space: pre;
 }
 

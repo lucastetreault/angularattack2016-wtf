@@ -86,12 +86,12 @@ export class CodeCompareComponent implements OnInit, OnActivate{
     );
   }
 
-  buttonOn(diff) {
-    diff.showButton = true;
-  }
-
-  buttonOff(diff){
-    diff.showButton = false;
+  randomWtf(diff) {
+    if(diff.imgSrc) {
+      diff.imgSrc = null;
+      return;
+    }
+    diff.imgSrc = "http://s2.quickmeme.com/img/d0/d0374478557798edfc964afd006512de457207f70346d8e2ef524a98afd73578.jpg";
   }
 
   private balanceDiff(diff){

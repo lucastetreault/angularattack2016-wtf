@@ -5,12 +5,26 @@
         </div>
         <table class='table table-condensed'>
             <tr *ngFor="let left of diff.lines.left; let i = index;" [class.head]="left.summary" [class.diff]="!left.summary">
-                <td *ngIf="left.summary">...</td>
-                <td *ngIf="left.summary" colspan="3">{{left.text}}</td>
-                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">{{left.number}}</td>
-                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color" (click)="left.showButton = !left.showButton;">{{left.text}}<span *ngIf="left.showButton"><button type="button" class="btn button-danger pull-right" (click)="addRandomWtf(left)">WTF?</button></span></td>
-                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">{{diff.lines.right[i].number}}</td>
-                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="diff.lines.right[i].color" (click)="diff.lines.right[i].showButton = !diff.lines.right[i].showButton;">{{diff.lines.right[i].text}}<button type="button" class="btn button-danger pull-right" (click)="addRandomWtf(diff.lines.right[i])">WTF?</button></span></td>
+                <td *ngIf="left.summary">
+                    ...
+                </td>
+                <td *ngIf="left.summary" colspan="3">
+                    <span class="keepWhite">{{left.text}}</span>
+                </td>
+                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">
+                    {{left.number}}
+                </td>
+                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color" (click)="randomWtf(left)">
+                    <span class=" keepWhite ">{{left.text}}</span>
+                    <img [hidden]="!left.imgSrc" [src]="left.imgSrc" height="200px" width="200px" class="pull-right">
+                </td>
+                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">
+                    {{diff.lines.right[i].number}}
+                </td>
+                <td *ngIf="!left.summary " style="width: 48% " class="diff " [style.background-color]="diff.lines.right[i].color " (click)="randomWtf(diff.lines.right[i])">
+                    <span class=" keepWhite ">{{diff.lines.right[i].text}}</span>
+                    <img [hidden]="!diff.lines.right[i].imgSrc " [src]="diff.lines.right[i].imgSrc " height="200px " width="200px " class="pull-right ">
+                </td>
             </tr>
         </table>
     </div>
