@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Routes, Router} from '@angular/router';
 import {PullRequestListComponent} from './pull-request-list/pull-request-list.component';
@@ -10,7 +10,8 @@ import {CodeCompareComponent} from './code-compare/code-compare.component';
   templateUrl: 'angularattack2016-wtf.component.html',
   styleUrls: ['angularattack2016-wtf.component.css'],
   providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS],
-  directives: [ROUTER_DIRECTIVES, PullRequestListComponent]
+  directives: [ROUTER_DIRECTIVES, PullRequestListComponent],
+  encapsulation: ViewEncapsulation.None
 })
 @Routes([
   {path: '/', component: PullRequestListComponent},
@@ -20,6 +21,6 @@ export class Angularattack2016WtfAppComponent {
   title = "WTF's per minute!";
 
   constructor(private router: Router){
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);
   }
 }

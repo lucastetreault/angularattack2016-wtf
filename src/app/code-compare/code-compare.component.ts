@@ -1,23 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {OnActivate, RouteSegment} from '@angular/router';
 import {DiffService} from './diff-service.service';
-import {CodeCompareDiffComponent} from '../code-compare-diff/code-compare-diff.component';
 
 @Component({
   moduleId: module.id,
   selector: 'app-code-compare',
   templateUrl: 'code-compare.component.html',
   styleUrls: ['code-compare.component.css'],
-  providers: [DiffService],
-  directives: [CodeCompareDiffComponent]
+  providers: [DiffService]
 })
 export class CodeCompareComponent implements OnInit, OnActivate{
 
   pullRequestId;
-  diff = [];
+  diffs = [];
 
   constructor(private diffService: DiffService) {
-    this.diff = [];
+    this.diffs = [];
   }
 
   ngOnInit() {
@@ -31,62 +29,62 @@ export class CodeCompareComponent implements OnInit, OnActivate{
     this.diffService.getDiff(this.pullRequestId).subscribe(res => {
       let lines = res.diff.split(/\r?\n/);
 
-      let file;
+      let diff;
 
       lines.forEach(line => {
         if (line.startsWith('diff')) {
-          if (file) {
-            that.diff.push(file);
+          if (diff) {
+            that.diffs.push(diff);
           }
 
-          file = {
-            left: {
-              lines: []
-            },
-            right: {
-              lines: []
+          diff = {
+            lines: {
+              right: [],
+              left: []
             }
           };
           let vars = line.split(' ');
-          file.left.filename = vars[2];
-          file.right.filename = vars[3];
+          diff.filename = vars[2].substr(2);
         } else if (line.startsWith('index')){
           // Uh, what does this one mean? 
         } else if (line.startsWith('---') || line.startsWith('+++')) {
           // Do nothing I guess? 
         } else if (line.startsWith('  ')) {
-          let diffLine = {
-            number: 0,
-            text: line
-          };
-          file.left.lines.push(diffLine);
-          file.right.lines.push(diffLine);
+
+          diff = this.balanceDiff(diff);
+          diff.lines.left.push({ number: '', text: line });
+          diff.lines.right.push({ number: '', text: line });
         } else if (line.startsWith('+ ')) {
-          let diffLine = {
-            number: 0,
-            text: line,
-            color: '#eaffea',
-            lineNumberColor: '#dbffdb'
-          };
-          file.left.lines.push({number: 0, text: ' '});
-          file.right.lines.push(diffLine);
+          diff.lines.right.push({number: '',
+                    text: line,
+                    color: '#eaffea',
+                    lineNumberColor: '#dbffdb' });
         } else if (line.startsWith('- ')) {
-          let diffLine = {
-            number: 0,
-            text: line,
-            color: '#ffecec',
-            lineNumberColor: '#ffdddd'
-          };
-          file.left.lines.push(diffLine);
-          file.right.lines.push({number: 0, text: ' '});
+          diff.lines.left.push({ number: '',
+                    text: line,
+                    color: '#ffecec',
+                    lineNumberColor: '#ffdddd' });
         }
       });
 
-      if (file) {
-        that.diff.push(file);
+      if (diff) {
+        diff = this.balanceDiff(diff);
+        that.diffs.push(diff);
       }
     }
     );
+  }
+
+  private balanceDiff(diff){
+    while (diff.lines.right.length < diff.lines.left.length) {
+      diff.lines.right.push({ number: '', text: ''});
+    }
+
+    while (diff.lines.left.length < diff.lines.right.length) {
+      diff.lines.left.push({ number: '', text: ''});
+    }
+
+    return diff;
   }
 
 }

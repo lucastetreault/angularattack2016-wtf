@@ -1,11 +1,15 @@
-<div *ngFor="let file of diff" class="col-md-12">
+<div *ngFor="let diff of diffs" style="margin-right: 5%; margin-left: 5%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            {{changes.filename}}
+            {{diff.filename}}
         </div>
-        <div class="panel-body">
-            <app-code-compare-diff [changes]="file.left"></app-code-compare-diff>
-            <app-code-compare-diff [changes]="file.right"></app-code-compare-diff>
-        </div>
+        <table class='table table-condensed'>
+            <tr *ngFor="let left of diff.lines.left; let i = index;" class="diff">
+                <td style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">{{left.number}}</td>
+                <td style="width: 48%" class="diff" [style.background-color]="left.color">{{left.text}}</td>
+                <td style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">{{diff.lines.right[i].number}}</td>
+                <td style="width: 48%" class="diff" [style.background-color]="diff.lines.right[i].color">{{diff.lines.right[i].text}}</td>
+            </tr>
+        </table>
     </div>
 </div>

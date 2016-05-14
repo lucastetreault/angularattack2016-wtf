@@ -1,0 +1,11 @@
+tr.diff {
+    border: none;
+}
+
+td.diff {
+    border-bottom: none;
+    border-top: none;
+    border-right: 1px solid rgb(221, 221, 221);
+    border-left: 1px solid rgb(221, 221, 221);
+    white-space: nowrap;
+}
