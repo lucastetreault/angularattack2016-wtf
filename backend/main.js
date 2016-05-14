@@ -27,7 +27,7 @@ var https = require('https');
             });
             response.on('end', function() {
                 console.log(body);
-                res.end(body);
+                res.end({'diff': body});
             });
         });
     });

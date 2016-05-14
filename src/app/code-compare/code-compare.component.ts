@@ -21,7 +21,8 @@ export class CodeCompareComponent implements OnInit, OnActivate{
 
   routerOnActivate(curr: RouteSegment) {
     this.pullRequestId = curr.getParam('pullRequestId');
-    this.diffService.getDiff(this.pullRequestId).subscribe(diff => this.diff = diff);
+    this.diffService.getDiff(this.pullRequestId).subscribe(diff => 
+    this.diff = diff );
   }
 
 }
