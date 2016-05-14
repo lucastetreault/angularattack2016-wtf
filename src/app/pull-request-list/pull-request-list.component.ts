@@ -1,5 +1,5 @@
 import {Component, OnInit } from '@angular/core';
-import {PullsService} from './pulls.service';
+import {PullsService} from '../pulls.service';
 import {PullRequestComponent} from '../pull-request/pull-request.component';
 
 @Component({
@@ -7,7 +7,6 @@ import {PullRequestComponent} from '../pull-request/pull-request.component';
   selector: 'app-pull-request-list',
   templateUrl: 'pull-request-list.component.html',
   styleUrls: ['pull-request-list.component.css'],
-  providers: [PullsService],
   directives: [PullRequestComponent]
 })
 

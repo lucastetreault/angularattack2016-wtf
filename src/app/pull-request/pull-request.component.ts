@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
+import {DiffService} from '../diff-service.service';
 
 @Component({
   moduleId: module.id,
   selector: 'app-pull-request',
   templateUrl: 'pull-request.component.html',
   styleUrls: ['pull-request.component.css'],
-    directives: [ROUTER_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES]
 
 })
 export class PullRequestComponent implements OnInit {
@@ -14,9 +15,13 @@ export class PullRequestComponent implements OnInit {
   @Input()
   pull;
 
-  constructor() {}
+  diff;
+
+  constructor(private diffService: DiffService) {
+  }
 
   ngOnInit() {
+    this.diff = this.diffService.getDiffFromCache(this.pull.number);
   }
 
 }

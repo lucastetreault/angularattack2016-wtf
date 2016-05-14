@@ -31,7 +31,14 @@ export class WtfImagesService {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHBPHoaWOvWl2ZhrKv3rXKOgRfeZXVARzZN6m7PzEH_GREMqElBA',
     'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTSFT5viNTYLay-y4ndiMFYV4gjMeFRxRFDR-mEfdzGoJn9R7kIuw',
     'http://i3.kym-cdn.com/entries/icons/original/000/005/954/wtf_is_this_shit2_RE_73_Million_Sharks_Killed_Every_Year-s468x349-71815.jpg',
-    'https://media.giphy.com/media/FRRK3vMJ4no52/giphy.gif'
+    'https://media.giphy.com/media/FRRK3vMJ4no52/giphy.gif', 
+    'https://upload.wikimedia.org/wikipedia/en/8/8f/WTF_with_Marc_Maron.png',
+    'http://weknowmemes.com/wp-content/uploads/2012/05/wtf-is-this.jpg',
+    'http://ci.memecdn.com/93/819093.jpg',
+    'https://media.giphy.com/media/t67DrVIzQfQhG/giphy.gif',
+    'http://gifsec.com/wp-content/uploads/GIF/2014/06/WTF-reaction-gifs.gif?gs=a',
+    'http://www.writingwinters.com/wp-content/uploads/wtfgrandma.jpg',
+    'http://www.relatably.com/m/img/wtf-memes-facebook/wtf-girl-meme.jpeg'
   ];
 
   constructor() {}

@@ -1,31 +1,72 @@
-<div *ngFor="let diff of diffs" style="margin-right: 5%; margin-left: 5%;">
-    <div class="panel panel-default">
+<div style="margin: 5%;">
+    <div class="panel panel-primary" [class.panel-success]="diffs.approved" [class.panel-danger]="diffs.rejected">
         <div class="panel-heading">
-            {{diff.filename}}
+            <h2>{{pullRequestId}}</h2>
+            <p class="keepWhite">
+                {{pullRequest.title}}
+            </p>
         </div>
-        <table class='table table-condensed'>
-            <tr *ngFor="let left of diff.lines.left; let i = index;" [class.head]="left.summary" [class.diff]="!left.summary">
-                <td *ngIf="left.summary">
-                    ...
-                </td>
-                <td *ngIf="left.summary" colspan="3">
-                    <span class="keepWhite">{{left.text}}</span>
-                </td>
-                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">
-                    {{left.number}}
-                </td>
-                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color" (click)="randomWtf(left)">
-                    <span class=" keepWhite ">{{left.text}}</span>
-                    <img [hidden]="!left.imgSrc" [src]="left.imgSrc" height="200px" width="200px" class="pull-right">
-                </td>
-                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">
-                    {{diff.lines.right[i].number}}
-                </td>
-                <td *ngIf="!left.summary " style="width: 48% " class="diff " [style.background-color]="diff.lines.right[i].color " (click)="randomWtf(diff.lines.right[i])">
-                    <span class=" keepWhite ">{{diff.lines.right[i].text}}</span>
-                    <img [hidden]="!diff.lines.right[i].imgSrc " [src]="diff.lines.right[i].imgSrc " height="200px " width="200px " class="pull-right ">
-                </td>
-            </tr>
-        </table>
+        <div class="panel-body">
+            <div class="col-md-3">
+                <img [hidden]="!pullRequest.user.avatar_url" [src]="pullRequest.user.avatar_url" height="200px" width="200px" />
+            </div>
+            <div class="col-md-9">
+                <p>
+                    <strong>Author:</strong>{{pullRequest.user.login}}
+                </p>
+                <p>
+                    <strong>Created:</strong>{{pullRequest.created_at}}
+                </p>
+                <p>
+                    <strong>Updated:</strong>{{pullRequest.updated_at}}
+                </p>
+                <p class="keepWhite">
+                    {{pullRequest.body}}
+                </p>
+                <div class="alert alert-danger col-md-3 text-center" *ngIf="diffs.rejected">
+                    Changes Requested!
+                </div>
+                <div class="alert alert-success col-md-3 text-center" *ngIf="diffs.approved">
+                    Approved!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let diff of diffs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{diff.filename}}
+            </div>
+            <table class='table table-condensed'>
+                <tr *ngFor="let left of diff.lines.left; let i = index;" [class.head]="left.summary" [class.diff]="!left.summary">
+                    <td *ngIf="left.summary">
+                        ...
+                    </td>
+                    <td *ngIf="left.summary" colspan="3">
+                        <span class="keepWhite">{{left.text}}</span>
+                    </td>
+                    <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">
+                        {{left.number}}
+                    </td>
+                    <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color" (click)="randomWtf(left)">
+                        <span class=" keepWhite ">{{left.text}}</span>
+                        <img [hidden]="!left.imgSrc" [src]="left.imgSrc" height="200px" width="200px" class="pull-right">
+                    </td>
+                    <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">
+                        {{diff.lines.right[i].number}}
+                    </td>
+                    <td *ngIf="!left.summary " style="width: 48% " class="diff " [style.background-color]="diff.lines.right[i].color " (click)="randomWtf(diff.lines.right[i])">
+                        <span class=" keepWhite ">{{diff.lines.right[i].text}}</span>
+                        <img [hidden]="!diff.lines.right[i].imgSrc " [src]="diff.lines.right[i].imgSrc " height="200px " width="200px " class="pull-right ">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <a [routerLink]="['/']"><button type="button" class="btn btn-success" (click)="approve();">Approve</button></a>
+        <a [routerLink]="['/']"><button type="button" class="btn btn-danger pull-right" (click)="reject();">Request Changes</button></a>
     </div>
 </div>
