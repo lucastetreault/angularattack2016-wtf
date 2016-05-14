@@ -76,7 +76,6 @@
 }
 
 #app-loading-brand {
-  background: url('white-swoosh.svg') center center no-repeat;
   position: fixed;
   background-size: contain;
   left: 50%; top: 50%;
