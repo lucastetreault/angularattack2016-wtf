@@ -1,6 +1,17 @@
 var express = require('express');
-var app = express();
 var https = require('https');
+var fs = require('fs');
+
+   var hskey = fs.readFileSync('angularattack-key.pem');
+   var hscert = fs.readFileSync('angularattack-cert.pem');
+
+   var options = {
+        key: hskey,
+        cert: hscert
+   };
+
+
+var app = express();
 
     app.use(function (req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,6 +43,9 @@ var https = require('https');
         });
     });
 
-    app.listen(8080, function () {
-        console.log('Angular Attack WTF/min listening on port 80!');
-    });
+
+https.createServer(options,app).listen(8080);
+
+//    app.listen(8080, function () {
+//        console.log('Angular Attack WTF/min listening on port 80!');
+//    });
