@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {PullsService} from '../pulls.service';
+import {Component, OnInit } from '@angular/core';
+import {PullsService} from './pulls.service';
 import {PullRequestComponent} from '../pull-request/pull-request.component';
 
 @Component({
