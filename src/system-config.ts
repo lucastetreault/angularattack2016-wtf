@@ -32,6 +32,7 @@ const barrels: string[] = [
   'app/pull-request-list',
   'app/pull-request',
   'app/code-compare',
+  'app/code-compare-diff',
   /** @cli-barrel */
 ];
 

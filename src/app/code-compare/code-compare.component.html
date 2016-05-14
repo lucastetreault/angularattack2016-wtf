@@ -1,16 +1,11 @@
-<div *ngFor="let file of diff">
-  <div class="col-md-6">
+<div *ngFor="let file of diff" class="col-md-12">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        {{file.left.filename}}
-      </div>
+        <div class="panel-heading">
+            {{changes.filename}}
+        </div>
+        <div class="panel-body">
+            <app-code-compare-diff [changes]="file.left"></app-code-compare-diff>
+            <app-code-compare-diff [changes]="file.right"></app-code-compare-diff>
+        </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        {{file.right.filename}}
-      </div>
-    </div>
-  </div>
 </div>
