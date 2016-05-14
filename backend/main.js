@@ -32,6 +32,6 @@ var https = require('https');
         });
     });
 
-    app.listen(8089, function () {
+    app.listen(80, function () {
         console.log('Angular Attack WTF/min listening on port 80!');
     });
