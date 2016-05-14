@@ -31,6 +31,7 @@ const barrels: string[] = [
   'app/shared',
   'app/pull-request-list',
   'app/pull-request',
+  'app/code-compare',
   /** @cli-barrel */
 ];
 
