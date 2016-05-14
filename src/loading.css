@@ -1,0 +1,86 @@
+#app-loading-wrapper {
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index: 9999;
+  background: #002136;
+  -webkit-transition: opacity 0.8s;
+  -moz-transition: opacity 0.8s;
+  -ms-transition: opacity 0.8s;
+  -o-transition: opacity 0.8s;
+  transition: opacity 0.8s;
+}
+
+#app-loading-wrapper.fadeout {
+  transition:2s linear all;
+  hidden: true;
+}
+
+#app-loading {
+  position: fixed;
+  left: 50%; top: 50%;
+  width: 180px;
+  height: 180px;
+  margin: -90px 0 0 -90px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top-color: #0073cf;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+#app-loading::before {
+  content: "";
+  position: absolute;
+  top: 5px; left: 5px; right: 5px;  bottom: 5px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top-color: #003E74;
+  border-bottom-color: #003E74;
+  -webkit-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite;
+}
+
+#app-loading::after {
+  content: "";
+  position: absolute;
+  top: 15px; left: 15px; right: 15px; bottom: 15px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+#app-loading-brand {
+  background: url('white-swoosh.svg') center center no-repeat;
+  position: fixed;
+  background-size: contain;
+  left: 50%; top: 50%;
+  width: 295px;
+  height: 82px;
+  margin: -40px 0 0 -68px;
+}
