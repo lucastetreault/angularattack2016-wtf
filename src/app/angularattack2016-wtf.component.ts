@@ -14,7 +14,7 @@ import {CodeCompareComponent} from './code-compare/code-compare.component';
 })
 @Routes([
   {path: '/', component: PullRequestListComponent},
-  {path: '/review/:pull', component: CodeCompareComponent}
+  {path: '/review/:pullRequestId', component: CodeCompareComponent}
 ])
 export class Angularattack2016WtfAppComponent {
   title = "WTF's per minute!";
