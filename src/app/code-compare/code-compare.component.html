@@ -4,11 +4,13 @@
             {{diff.filename}}
         </div>
         <table class='table table-condensed'>
-            <tr *ngFor="let left of diff.lines.left; let i = index;" class="diff">
-                <td style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">{{left.number}}</td>
-                <td style="width: 48%" class="diff" [style.background-color]="left.color">{{left.text}}</td>
-                <td style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">{{diff.lines.right[i].number}}</td>
-                <td style="width: 48%" class="diff" [style.background-color]="diff.lines.right[i].color">{{diff.lines.right[i].text}}</td>
+            <tr *ngFor="let left of diff.lines.left; let i = index;" [class.head]="left.summary" [class.diff]="!left.summary">
+                <td *ngIf="left.summary">...</td>
+                <td *ngIf="left.summary" colspan="3">{{left.text}}</td>
+                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left.lineNumberColor">{{left.number}}</td>
+                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left.color">{{left.text}}</td>
+                <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff.lines.right[i].lineNumberColor">{{diff.lines.right[i].number}}</td>
+                <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="diff.lines.right[i].color">{{diff.lines.right[i].text}}</td>
             </tr>
         </table>
     </div>
