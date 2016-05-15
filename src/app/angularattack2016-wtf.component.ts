@@ -16,13 +16,12 @@ import {PullsService} from './pulls.service';
   encapsulation: ViewEncapsulation.None
 })
 @Routes([
-  {path: '/', component: PullRequestListComponent},
-  {path: '/review/:pullRequestId', component: CodeCompareComponent}
+  { path: '/', component: PullRequestListComponent },
+  { path: '/review/:pullRequestId', component: CodeCompareComponent }
 ])
 export class Angularattack2016WtfAppComponent {
   title = "WTF's per minute!";
 
-  constructor(private router: Router){
-    // this.router.navigate(['/']);
+  constructor(private router: Router) {
   }
 }

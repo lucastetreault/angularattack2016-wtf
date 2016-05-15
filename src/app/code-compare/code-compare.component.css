@@ -9,9 +9,10 @@ tr.head {
     border-top: none;
     border-right: 1px solid rgb(221, 221, 221);
     border-left: 1px solid rgb(221, 221, 221);
+    word-wrap: break-word;
 }
 
-span.keepWhite {
+.keepWhite {
     white-space: pre;
 }
 

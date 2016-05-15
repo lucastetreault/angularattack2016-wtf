@@ -21,7 +21,7 @@ export class PullRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.diff = this.diffService.getDiffFromCache(this.pull.number);
+    this.diff = this.diffService.getDiff(this.pull.number);
   }
 
 }

@@ -3,42 +3,42 @@
         <div class="panel-heading">
             <h2>{{pullRequestId}}</h2>
             <p class="keepWhite">
-                {{pullRequest.title}}
+                {{(pullRequest | async)?.title}}
             </p>
         </div>
         <div class="panel-body">
             <div class="col-md-3">
-                <img [hidden]="!pullRequest.user.avatar_url" [src]="pullRequest.user.avatar_url" height="200px" width="200px" />
+                <img [hidden]="!(pullRequest | async)?.user?.avatar_url" [src]="(pullRequest | async)?.user?.avatar_url" height="200px" width="200px" />
             </div>
             <div class="col-md-9">
                 <p>
-                    <strong>Author:</strong>{{pullRequest.user.login}}
+                    <strong>Author:</strong>{{(pullRequest | async)?.user?.login}}
                 </p>
                 <p>
-                    <strong>Created:</strong>{{pullRequest.created_at}}
+                    <strong>Created:</strong>{{(pullRequest | async)?.created_at}}
                 </p>
                 <p>
-                    <strong>Updated:</strong>{{pullRequest.updated_at}}
+                    <strong>Updated:</strong>{{(pullRequest | async)?.updated_at}}
                 </p>
                 <p class="keepWhite">
-                    {{pullRequest.body}}
+                    {{(pullRequest | async)?.body}}
                 </p>
-                <div class="alert alert-danger col-md-3 text-center" *ngIf="diffs.rejected">
+                <div class="alert alert-danger col-md-3 text-center" *ngIf="(diffs | async)?.rejected">
                     Changes Requested!
                 </div>
-                <div class="alert alert-success col-md-3 text-center" *ngIf="diffs.approved">
+                <div class="alert alert-success col-md-3 text-center" *ngIf="(diffs | async)?.approved">
                     Approved!
                 </div>
             </div>
         </div>
     </div>
 
-    <div *ngFor="let diff of diffs">
+    <div *ngFor="let diff of diffs | async">
         <div class="panel panel-default">
             <div class="panel-heading">
                 {{diff.filename}}
             </div>
-            <table class='table table-condensed'>
+            <table class='table table-condensed table-responsive'>
                 <tr *ngFor="let left of diff.lines.left; let i = index;" [class.head]="left.summary" [class.diff]="!left.summary">
                     <td *ngIf="left.summary">
                         ...
@@ -67,6 +67,6 @@
 
     <div>
         <a [routerLink]="['/']"><button type="button" class="btn btn-success" (click)="approve();">Approve</button></a>
-        <a [routerLink]="['/']"><button type="button" class="btn btn-danger pull-right" (click)="reject();">Request Changes</button></a>
+        <a [routerLink]="['/']"><button type="button" class="btn btn-danger" (click)="reject();">Request Changes</button></a>
     </div>
 </div>
