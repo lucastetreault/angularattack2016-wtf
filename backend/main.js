@@ -60,7 +60,6 @@ app.get("/getAuthToken/:code", function(req, res) {
             body += d;
         });
         response.on('end', function() {
-            // console.log(body);
             res.end(JSON.stringify(querystring.parse(body)));
         });
     });
@@ -69,46 +68,6 @@ app.get("/getAuthToken/:code", function(req, res) {
     req.on('error', function(e) {
         console.error(e);
     });
-
-
-    // var body = '';
-
-    // var options = {
-    //     hostname: 'github.com',
-    //     path: '/login/oauth/access_token',
-    //     method: 'POST',
-    //     port: 443,
-    //     headers: {
-    //         'Content-Type': 'application/x-www-form-urlencoded',
-    //         'Content-Length': body.length,
-    //         client_id: clientId,
-    //         client_secret: clientSecret,
-    //         code: req.code
-    //     }
-    // };
-
-    // var req = https.request(options, (response) => {
-    //     console.log(`STATUS: ${response.statusCode}`);
-    //     console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
-    //     response.setEncoding('utf8');
-
-    //     var body = '';
-    //     response.on('data', function(d) {
-    //         body += d;
-    //     });
-    //     response.on('end', function() {
-    //         // console.log(body);
-    //         res.end(body);
-    //     });
-    // });
-
-    // req.on('error', (e) => {
-    //     console.log(`problem with request: ${e.message}`);
-    // });
-
-    // // write data to request body
-    // req.write(body);
-    // req.end();
 });
 
 app.listen(8080, function() {

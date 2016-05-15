@@ -21,9 +21,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </head>
 
-<base href="/">
-
 <body>
+    <script>
+        window.gitHubAuthCode = window.location.search.substr(6);
+        console.log(window.gitHubAuthCode);
+    </script>
+
     <container>
         <angularattack2016-wtf-app>
             <div id="app-loading-wrapper">

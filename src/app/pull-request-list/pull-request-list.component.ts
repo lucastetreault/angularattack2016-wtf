@@ -1,7 +1,6 @@
 import {Component, OnInit } from '@angular/core';
 import {PullsService} from '../pulls.service';
 import {PullRequestComponent} from '../pull-request/pull-request.component';
-import {RouteSegment} from '@angular/router';
 import {GithubService} from '../github.service';
 
 
@@ -18,11 +17,10 @@ export class PullRequestListComponent implements OnInit {
   private pulls;
   private repos;
 
-  constructor(private pullService: PullsService, private curr: RouteSegment, private github: GithubService) { }
+  constructor(private pullService: PullsService, private github: GithubService) { }
 
   ngOnInit() {
     this.pulls = this.pullService.getPullRequests();
-    this.github.setCode(this.curr.getParam('code'));
     this.repos = this.github.getRepos();
     this.repos.subscribe(repos => console.log(repos));
   }
