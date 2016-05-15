@@ -1,6 +1,7 @@
-<p>
-    <a [routerLink]="['/']"><button type="button" class="btn btn-primary pull-right">Go Back</button></a>
-</p>
+<div class="col-md-12">
+    <a [routerLink]="['/']"><button type="button" class="btn btn-primary">Back</button></a>
+    <br/>
+</div>
 <div style="margin: 5%;">
     <div class="panel panel-primary" [class.panel-success]="diffs?.approved" [class.panel-danger]="diffs?.rejected">
         <div class="panel-heading">
@@ -46,22 +47,22 @@
                     <td *ngIf="left?.summary">
                         ...
                     </td>
-                    <td *ngIf="left.summary" colspan="3">
+                    <td *ngIf="left?.summary" colspan="3">
                         <span class="keepWhite">{{left.text}}</span>
                     </td>
-                    <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="left?.lineNumberColor">
-                        {{left.number}}
+                    <td *ngIf="!left?.summary" style="width: 2%" class="diff" [style.background-color]="left?.lineNumberColor">
+                        {{left?.number}}
                     </td>
                     <td *ngIf="!left.summary" style="width: 48%" class="diff" [style.background-color]="left?.color" (click)="randomWtf(left)">
                         <span class=" keepWhite ">{{left.text}}</span>
                         <img [hidden]="!left.imgSrc" [src]="left.imgSrc" height="200px" width="200px" class="pull-right">
                     </td>
                     <td *ngIf="!left.summary" style="width: 2%" class="diff" [style.background-color]="diff?.lines.right[i]?.lineNumberColor">
-                        {{diff.lines.right[i].number}}
+                        {{diff?.lines?.right[i]?.number}}
                     </td>
-                    <td *ngIf="!left.summary " style="width: 48% " class="diff " [style.background-color]="diff?.lines?.right[i].color " (click)="randomWtf(diff?.lines?.right[i])">
-                        <span class=" keepWhite ">{{diff?.lines?.right[i].text}}</span>
-                        <img [hidden]="!diff?.lines?.right[i].imgSrc " [src]="diff?.lines?.right[i].imgSrc " height="200px " width="200px " class="pull-right ">
+                    <td *ngIf="!left.summary " style="width: 48% " class="diff " [style.background-color]="diff?.lines?.right[i]?.color " (click)="randomWtf(diff?.lines?.right[i])">
+                        <span class=" keepWhite ">{{diff?.lines?.right[i]?.text}}</span>
+                        <img [hidden]="!diff?.lines?.right[i]?.imgSrc " [src]="diff?.lines?.right[i]?.imgSrc " height="200px " width="200px " class="pull-right ">
                     </td>
                 </tr>
             </table>
