@@ -15,10 +15,15 @@ app.param('pullRequestId', function(req, res, next, pullRequestId) {
     next();
 });
 
-app.get("/diff/:pullRequestId", function(req, res) {
+app.param('accessToken', function(req, res, next, accessToken) {
+    req.accessToken = accessToken;
+    next();
+});
+
+app.get("/diff/:pullRequestId/:accessToken", function(req, res) {
     https.get({
         host: 'patch-diff.githubusercontent.com',
-        path: '/raw/angular/angular/pull/' + req.pullRequestId + '.diff'
+        path: '/raw/angular/angular/pull/' + req.pullRequestId + '.diff?access_token=' + req.accessToken
     }, function(response) {
         console.log(`Got response: ${response.statusCode}`);
 

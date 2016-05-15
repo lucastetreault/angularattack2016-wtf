@@ -2,10 +2,18 @@
     <h1>WTFs per minute</h1>
     <p>The only valid measurement of code quality!</p>
     <button type="submit" class="btn btn-primary" (click)="login()" *ngIf="!isLoggedIn()">Login to Github</button>
-    <p *ngIf="(repos | async)">Select a repository:
+    <p *ngIf="isLoggedIn()">Select a repository:
         <select class="form-control" style="width: 300px" (change)="onChange($event.target.value)">
         <option *ngFor="let repo of repos | async">{{repo.full_name}}</option> 
     </select>
+    </p>
+
+    <p *ngIf="isLoggedIn()">
+        OR
+    </p>
+
+    <p *ngIf="isLoggedIn()">
+        <button type="submit" class="btn btn-primary" (click)="onChange('angular/angular')">View Angular 2 Pull Requests</button>
     </p>
 </div>
 <div style="margin: 5%;" *ngIf="(pulls | async)?.length > 0">

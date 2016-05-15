@@ -29,6 +29,10 @@ export class CodeCompareComponent implements OnInit, OnActivate {
 
     this.pullRequest = this.pullsService.getPullRequestDetails(this.pullRequestId);
     this.diffs = this.diffService.getDiff(this.pullRequestId);
+
+    this.diffs.subscribe(diffs => {
+      debugger;
+    })
   }
 
   randomWtf(diff) {

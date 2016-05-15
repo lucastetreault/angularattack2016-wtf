@@ -2,12 +2,13 @@ import { Injectable, Input} from '@angular/core';
 import {Http} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import {GithubService} from './github.service';
 
 @Injectable()
 export class DiffService {
   private diffs = {};
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private github: GithubService) { }
 
   getDiff(pullRequestId) {
     let diffs = this.getDiffFromCache(pullRequestId);
@@ -15,7 +16,7 @@ export class DiffService {
       return new Observable(observer => observer.next(diffs));
     }
 
-    return this.http.request('http://ec2-52-37-59-24.us-west-2.compute.amazonaws.com:8080/diff/' + pullRequestId)
+    return this.http.request('http://ec2-52-37-59-24.us-west-2.compute.amazonaws.com:8080/diff/' + pullRequestId + '/' + this.github.accessToken)
       .map(res => res.json())
       .map(res => this.mapDiff(res, pullRequestId));
   }
