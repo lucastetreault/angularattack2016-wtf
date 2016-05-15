@@ -6,7 +6,6 @@ import { Observer } from 'rxjs/Observer';
 @Injectable()
 export class DiffService {
   private diffs = {};
-  private details = {};
 
   constructor(private http: Http) { }
 
@@ -104,6 +103,13 @@ export class DiffService {
     });
 
     diff = this.balanceDiff(diff);
+    
+    diff.lines.left = diff.lines.left.map(line => {
+      for(let i = 80; i < line.text.length ; i += 80){
+        line.text = line.text.substr(0,i) + '\n' + line.text.substr(i += 1)
+      }
+    })
+    
     diffs.push(diff);
     this.update(pullRequestId, diffs);
     return diffs;
