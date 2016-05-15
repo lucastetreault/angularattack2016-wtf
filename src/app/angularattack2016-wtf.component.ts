@@ -5,13 +5,13 @@ import {PullRequestListComponent} from './pull-request-list/pull-request-list.co
 import {CodeCompareComponent} from './code-compare/code-compare.component';
 import {DiffService} from './diff-service.service';
 import {PullsService} from './pulls.service';
+import {GithubService} from './github.service';
 
 @Component({
   moduleId: module.id,
   selector: 'angularattack2016-wtf-app',
   templateUrl: 'angularattack2016-wtf.component.html',
-  styleUrls: ['angularattack2016-wtf.component.css'],
-  providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, DiffService, PullsService],
+  providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, DiffService, PullsService, GithubService],
   directives: [ROUTER_DIRECTIVES, PullRequestListComponent],
   encapsulation: ViewEncapsulation.None
 })

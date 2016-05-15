@@ -6,7 +6,6 @@ import {DiffService} from '../diff-service.service';
   moduleId: module.id,
   selector: 'app-pull-request',
   templateUrl: 'pull-request.component.html',
-  styleUrls: ['pull-request.component.css'],
   directives: [ROUTER_DIRECTIVES]
 
 })

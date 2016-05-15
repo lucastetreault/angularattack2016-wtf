@@ -3,14 +3,16 @@ import {Http} from '@angular/http';
 import {DiffService} from './diff-service.service';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import {GithubService} from './github.service';
 
 
 @Injectable()
 export class PullsService {
   private pullRequests;
   pulls = {};
+  private repo;
 
-  constructor(private http: Http, private diffService: DiffService) {
+  constructor(private http: Http, private diffService: DiffService, private github: GithubService) {
     this.pullRequests = this.http.get('https://api.github.com/repos/angular/angular/pulls')
       .map(res => res.json());
 
@@ -21,20 +23,16 @@ export class PullsService {
     });
   }
 
-  getPullRequests() {
-    return this.pullRequests;
+  getPullRequests(repo) {
+    this.repo = repo;
+
+    return this.http.get('https://api.github.com/repos/' + this.repo + '/pulls?access_token=' + this.github.accessToken)
+      .map(res => res.json());
   }
 
   getPullRequestDetails(pullRequestNumber) {
-    let that = this;
-
-    return new Observable(observer => {
-      that.pullRequests.subscribe(pulls => {
-        pulls = pulls.filter(pull => pull.number == pullRequestNumber);
-        observer.next(pulls[0]);
-      });
-    }
-    );
+    return this.http.get('https://api.github.com/repos/' + this.repo + '/pulls/pullRequestNumber?access_token=' + this.github.accessToken)
+      .map(res => res.json());
   }
 
 }

@@ -2,11 +2,13 @@
     <h1>WTFs per minute</h1>
     <p>The only valid measurement of code quality!</p>
     <button type="submit" class="btn btn-primary" (click)="login()" *ngIf="!isLoggedIn()">Login to Github</button>
-    <select class="form-control col-md-2" *ngIf="(repos | async)">
+    <p *ngIf="(repos | async)">Select a repository:
+        <select class="form-control" style="width: 300px" (change)="onChange($event.target.value)">
         <option *ngFor="let repo of repos | async">{{repo.full_name}}</option> 
     </select>
+    </p>
 </div>
-<div style="margin: 5%;" *ngIf="(pulls | async)">
+<div style="margin: 5%;" *ngIf="(pulls | async)?.length > 0">
     <h1>Active Pull Request</h1>
 
     <div class="list-group">
@@ -14,4 +16,8 @@
             <app-pull-request [pull]="pull"></app-pull-request>
         </div>
     </div>
+</div>
+
+<div style="margin: 5%;" *ngIf="(pulls | async)?.length === 0">
+    <h1>WTF? This repo has no pull request</h1>
 </div>

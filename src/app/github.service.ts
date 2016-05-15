@@ -9,7 +9,7 @@ import 'rxjs/add/operator/share';
 export class GithubService {
 
   private accessTokenObservable;
-  private accessToken = null;
+  accessToken = null;
 
   constructor(private http: Http) {
     if (!window['gitHubAuthCode']) {

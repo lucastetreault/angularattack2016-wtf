@@ -9,18 +9,17 @@ import {GithubService} from '../github.service';
   selector: 'app-pull-request-list',
   templateUrl: 'pull-request-list.component.html',
   styleUrls: ['pull-request-list.component.css'],
-  providers: [GithubService],
   directives: [PullRequestComponent]
 })
 export class PullRequestListComponent implements OnInit {
 
   private pulls;
   private repos;
+  private selectedRepo;
 
   constructor(private pullService: PullsService, private github: GithubService) { }
 
   ngOnInit() {
-    this.pulls = this.pullService.getPullRequests();
     this.repos = this.github.getRepos();
   }
 
@@ -32,4 +31,7 @@ export class PullRequestListComponent implements OnInit {
     return this.github.isLoggedIn();
   }
 
+  onChange(repo) {
+    this.pulls = this.pullService.getPullRequests(repo);
+  }
 }
