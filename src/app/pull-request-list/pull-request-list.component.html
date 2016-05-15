@@ -3,10 +3,10 @@
     <p>The only valid measurement of code quality!</p>
     <button type="submit" class="btn btn-primary" (click)="login()" *ngIf="!isLoggedIn()">Login to Github</button>
     <select class="form-control col-md-2" *ngIf="(repos | async)">
-        <option *ngFor="let repo of repos | async">{{repo}}</option> 
+        <option *ngFor="let repo of repos | async">{{repo.full_name}}</option> 
     </select>
 </div>
-<div style="margin: 5%;">
+<div style="margin: 5%;" *ngIf="(pulls | async)">
     <h1>Active Pull Request</h1>
 
     <div class="list-group">

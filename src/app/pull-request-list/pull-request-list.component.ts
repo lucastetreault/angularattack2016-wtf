@@ -28,7 +28,7 @@ export class PullRequestListComponent implements OnInit {
     window.location.href = <any>'https://github.com/login/oauth/authorize?client_id=9b4410e16f2ebd31a513&scope=public_repo,repo';
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return this.github.isLoggedIn();
   }
 
