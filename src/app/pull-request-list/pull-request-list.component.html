@@ -1,8 +1,8 @@
 <div class="jumbotron">
     <h1>WTFs per minute</h1>
     <p>The only valid measurement of code quality!</p>
-    <button type="submit" class="btn btn-primary" (click)="login()" [hidden]="authService.isLoggedIn()">Login to Github</button>
-    <select class="form-control" [hidden]="!authService.isLoggedIn()">
+    <button type="submit" class="btn btn-primary" (click)="login()" [hidden]="github.isLoggedIn()">Login to Github</button>
+    <select class="form-control col-md-2" [hidden]="!github.isLoggedIn()">
         <option *ngFor="let repo of repos | async">{{repo}}</option> 
     </select>
 </div>

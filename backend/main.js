@@ -1,6 +1,7 @@
 var express = require('express');
 var https = require('https');
 var app = express();
+var querystring = require('querystring');
 
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -32,6 +33,82 @@ app.get("/diff/:pullRequestId", function(req, res) {
             }));
         });
     });
+});
+
+app.param('code', function(req, res, next, code) {
+    req.code = code;
+    next();
+});
+
+app.get("/getAuthToken/:code", function(req, res) {
+    var clientId = '9b4410e16f2ebd31a513';
+    var clientSecret = '49f3f5adb5df06b46e27e65ecd6076b72df61aea';
+
+    var options = {
+        hostname: 'github.com',
+        port: 443,
+        path: '/login/oauth/access_token?client_id=' + clientId + '&client_secret=' + clientSecret + '&code=' + req.code,
+        method: 'GET'
+    };
+
+    var req = https.request(options, function(response) {
+        console.log("statusCode: ", response.statusCode);
+        console.log("headers: ", response.headers);
+
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            // console.log(body);
+            res.end(JSON.stringify(querystring.parse(body)));
+        });
+    });
+    req.end();
+
+    req.on('error', function(e) {
+        console.error(e);
+    });
+
+
+    // var body = '';
+
+    // var options = {
+    //     hostname: 'github.com',
+    //     path: '/login/oauth/access_token',
+    //     method: 'POST',
+    //     port: 443,
+    //     headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded',
+    //         'Content-Length': body.length,
+    //         client_id: clientId,
+    //         client_secret: clientSecret,
+    //         code: req.code
+    //     }
+    // };
+
+    // var req = https.request(options, (response) => {
+    //     console.log(`STATUS: ${response.statusCode}`);
+    //     console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
+    //     response.setEncoding('utf8');
+
+    //     var body = '';
+    //     response.on('data', function(d) {
+    //         body += d;
+    //     });
+    //     response.on('end', function() {
+    //         // console.log(body);
+    //         res.end(body);
+    //     });
+    // });
+
+    // req.on('error', (e) => {
+    //     console.log(`problem with request: ${e.message}`);
+    // });
+
+    // // write data to request body
+    // req.write(body);
+    // req.end();
 });
 
 app.listen(8080, function() {

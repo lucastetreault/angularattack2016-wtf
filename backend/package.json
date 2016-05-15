@@ -18,6 +18,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.13.4",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "querystring": "^0.2.0"
   }
 }
