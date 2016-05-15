@@ -10,10 +10,16 @@ export class DiffService {
 
   constructor(private http: Http, private github: GithubService) { }
 
-  getDiff(pullRequestId) {
+  getCachedDiff(pullRequestId) {
     let diffs = this.getDiffFromCache(pullRequestId);
-    if (diffs.length !== 0) {
-      return new Observable(observer => observer.next(diffs));
+    return new Observable(observer => observer.next(diffs));
+  }
+
+  getDiff(pullRequestId) {
+    let cachedDiffs = this.getDiffFromCache(pullRequestId);
+    if (cachedDiffs.length !== 0) {
+      debugger;
+      return new Observable(observer => observer.next(cachedDiffs));
     }
 
     return this.http.request('http://ec2-52-37-59-24.us-west-2.compute.amazonaws.com:8080/diff/' + pullRequestId + '/' + this.github.accessToken)
@@ -104,12 +110,6 @@ export class DiffService {
     });
 
     diff = this.balanceDiff(diff);
-
-    diff.lines.left = diff.lines.left.map(line => {
-      for (let i = 80; i < line.text.length; i += 80) {
-        line.text = line.text.substr(0, i) + '\n' + line.text.substr(i += 1)
-      }
-    })
 
     diffs.push(diff);
     this.update(pullRequestId, diffs);

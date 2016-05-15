@@ -14,10 +14,13 @@ export class PullRequestComponent implements OnInit {
   @Input()
   pull;
 
+  diff;
+
   constructor(private diffService: DiffService) {
   }
 
   ngOnInit() {
+    this.diff = this.diffService.getCachedDiff(this.pull.number);
   }
 
 }

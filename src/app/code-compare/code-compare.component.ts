@@ -19,7 +19,9 @@ export class CodeCompareComponent implements OnInit, OnActivate {
   diffs;
   pullRequest;
 
-  constructor(private diffService: DiffService, private wtfImageService: WtfImagesService, private pullsService: PullsService) {
+  constructor(private diffService: DiffService,
+    private wtfImageService: WtfImagesService,
+    private pullsService: PullsService) {
   }
 
   ngOnInit() { }
@@ -28,11 +30,7 @@ export class CodeCompareComponent implements OnInit, OnActivate {
     this.pullRequestId = curr.getParam('pullRequestId');
 
     this.pullRequest = this.pullsService.getPullRequestDetails(this.pullRequestId);
-    this.diffs = this.diffService.getDiff(this.pullRequestId);
-
-    this.diffs.subscribe(diffs => {
-      debugger;
-    })
+    this.diffService.getDiff(this.pullRequestId).subscribe(diffs => this.diffs = diffs);
   }
 
   randomWtf(diff) {

@@ -20,12 +20,11 @@ export class PullRequestListComponent implements OnInit {
   constructor(private pullService: PullsService, private github: GithubService) { }
 
   ngOnInit() {
-    if (this.github.isLoggedIn()) {
-      this.repos = this.github.getRepos();
-      if (this.pullService.isRepoSet()) {
-        this.pulls = this.pullService.getPullRequests();
-      }
-    }
+    this.init();
+  }
+
+  routerOnActivate() {
+    this.init();
   }
 
   login() {
@@ -39,5 +38,12 @@ export class PullRequestListComponent implements OnInit {
   onChange(repo) {
     this.pullService.setRepo(repo);
     this.pulls = this.pullService.getPullRequests();
+  }
+
+  private init() {
+    this.repos = this.github.getRepos();
+    if (this.pullService.isRepoSet()) {
+      this.pulls = this.pullService.getPullRequests();
+    }
   }
 }
