@@ -22,11 +22,14 @@ export class PullRequestListComponent implements OnInit {
   ngOnInit() {
     this.pulls = this.pullService.getPullRequests();
     this.repos = this.github.getRepos();
-    this.repos.subscribe(repos => console.log(repos));
   }
 
   login() {
     window.location.href = <any>'https://github.com/login/oauth/authorize?client_id=9b4410e16f2ebd31a513&scope=public_repo,repo';
+  }
+
+  isLoggedIn(){
+    return this.github.isLoggedIn();
   }
 
 }
